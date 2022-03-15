@@ -1,0 +1,77 @@
+<div class="text-layout">
+    <h1>Pipes personalizados</h1>
+    <p>Pipes creados por nosotros </p>
+
+    <div class="grid">
+        <div class="col-4">
+            <p-card header="Mayúsculas-Minúsculas" subheader="Esta pipe haría lo mismo que la uppercase y la lowercase">
+                <h3>Palabra: <small>"hola"</small></h3>
+
+                <!-- Usamos nuestro mayus pipe -->
+                <p>{{ palabra | mayus:flag }}</p>
+
+                <button pButton type="button" label="Cambiar estilo" (click)="cambiarEstiloPalabra()"></button>
+            </p-card>
+        </div>
+        <div class="col-8">
+            <p-card header="Tabla y Toolbar" subheader="Pipes personalizados usados: ordenar pipe, vuela pipe">
+                <div class="mt-3 col-12">
+                    <p-toolbar>
+                        <div class="p-toolbar-group-left col-12 md:col-3 lg:col-4">
+                            <p>Ordenar por:</p>
+                        </div>
+                        
+                        <div class="p-toolbar-group-right grid col-12 md:col-9 lg:col-8 botonera">
+                            <button pButton 
+                                    icon="pi pi-sort" 
+                                    label="nombre" 
+                                    class="col-12 md:col-3 mr-1 p-button-warning" 
+                                    (click)="ordenarPor('nombre')"
+                            ></button>
+                            <button pButton 
+                                    icon="pi pi-sort" 
+                                    label="vuela" 
+                                    class="col-12 sm:mt-3 md:mt-0 md:col-4 mr-1 p-button-success" 
+                                    (click)="ordenarPor('vuela')"
+                            ></button>
+                            <button pButton 
+                                    icon="pi pi-sort" 
+                                    label="color" 
+                                    class="col-12 sm:mt-3 md:mt-0 md:col-4 mr-1 p-button-help" 
+                                    (click)="ordenarPor('color')"
+                            ></button>
+                        </div>
+                    </p-toolbar>
+                </div>
+
+                <div class="mt-3">
+                    <!-- Usamos nuestro ordenar pipe -->
+                    <p-table [value]="heroes | ordenar:campo" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Vuela</th>
+                                <th>Color</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-heroe>
+                            <tr>
+                                <td>{{ heroe.nombre }}</td>
+
+                                <!-- Usamos nuestro vuela pipe -->
+                                <td>{{ heroe.vuela | vuela | titlecase }}</td>
+
+                                <td>{{ heroe.color }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </p-card>
+        </div>
+        <!-- <div class="col-4">
+            <p-card header="titlecase" subheader="subheaderCompleto">
+                
+            </p-card>
+        </div> -->
+    </div>
+</div>

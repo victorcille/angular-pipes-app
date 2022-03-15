@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+/* 
+    Fijarse cómo le decimos a nuestro css que  algunas propiedades como el font-family que queremos aplicar lo coja de la variable 
+    --font-family definida en el tema vela-blue del primeNG cargado en los estilos del angular.json
+*/
+html, body {
+    margin: 10px;
+    background-color: var( --surface-b );
+    font-family: var( --font-family );
+}
+
+.text-layout {
+    color: var( --text-color )
+}

@@ -1,0 +1,92 @@
+<div class="text-layout">
+    <h1>DecimalPipe y Porcentaje</h1>
+    <p>Pipes incluídos en Angular - Usualmente en el Common Module</p>
+</div>
+
+<!-- 
+    Estas tablas que usamos aquí están hechas con html normal y flex. 
+    En el componente ordenar.component.html sí que usaremos el módulo de tablas del primeNG 
+-->
+
+<div class="grid">
+    <div class="col-12 md:col-6 lg:col-4">
+        <p-card header="Ventas Netas" subheader="del presente año">
+            <table class="col-12">
+                <thead class="col-12">
+                    <tr>
+                        <th class="col-6">Elemento</th>
+                        <th class="col-6">Resultado <i class="pi pi-euro"></i></th>
+                    </tr>
+                </thead>
+                <tbody class="col-12">
+                    <tr>
+                        <td class="col-6">ventasNetas</td>
+                        <td class="col-6">{{ ventasNetas }} <i class="pi pi-euro"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="col-6">ventasNetas | number</td>
+                        <td class="col-6">{{ ventasNetas | number }} <i class="pi pi-euro"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="col-6">ventasNetas | number:'1.2-2'</td>
+                        <td class="col-6">{{ ventasNetas | number:'1.2-2' }} <i class="pi pi-euro"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </p-card>
+    </div>
+    
+    <div class="col-12 md:col-6 lg:col-4">
+        <p-card header="Ventas Brutas" subheader="del presente año">
+            <table class="col-12">
+                <thead class="col-12">
+                    <tr>
+                        <th class="col-8">Elemento</th>
+                        <th class="col-4">Resultado</th>
+                    </tr>
+                </thead>
+                <tbody class="col-12">
+                    <tr>
+                        <td class="col-8">(ventasNetas + 2000000) | currency</td>
+                        <td class="col-4">{{ (ventasNetas + 2000000) | currency }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-8">(ventasNetas + 2000000) | currency:'EUR'</td>
+                        <td class="col-4">{{ (ventasNetas + 2000000) | currency:'EUR' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-8">ventasNetas | currency:'':'symbol-narrow'</td>
+                        <td class="col-4">{{ (ventasNetas + 2000000) | currency:'':'symbol-narrow' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p-card>
+    </div>
+
+    <div class="col-12 md:col-6 lg:col-4">
+        <p-card header="% de Ganancias" subheader="del presente año">
+            <table class="col-12">
+                <thead class="col-12">
+                    <tr>
+                        <th class="col-6">Elemento</th>
+                        <th class="col-6">Resultado</th>
+                    </tr>
+                </thead>
+                <tbody class="col-12">
+                    <tr>
+                        <td class="col-6">porcentaje</td>
+                        <td class="col-6">{{ porcentaje }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-6">porcentaje | percent</td>
+                        <td class="col-6">{{ porcentaje | percent }}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-6">porcentaje | percent:'2.2-2'</td>
+                        <td class="col-6">{{ porcentaje | percent:'2.2-2' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p-card>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="text-layout">
+    <h1>Pipes Básicos</h1>
+    <p>Pipes incluídos en Angular - Usualmente en el Common Module</p>
+</div>
+
+<!-- Fijarse cómo damos estilos a las filas (rows) y columnas con flex (muy parecido a bootstrap) -->
+<div class="grid">
+    <div class="col-4">
+        <p-card header="uppercase" [subheader]="subheaderUpper">
+            <h3>Con el pipe: <small>{{ nombreLower|uppercase }}</small></h3>
+        </p-card>
+    </div>
+    <div class="col-4">
+        <p-card header="lowercase" [subheader]="subheaderLower">
+            <h3>Con el pipe: <small>{{ nombreUpper|lowercase }}</small></h3>
+        </p-card>
+    </div>
+    <div class="col-4">
+        <p-card header="titlecase" [subheader]="subheaderCompleto">
+            <h3>Con el pipe: <small>{{ nombreCompleto|titlecase }}</small></h3>
+        </p-card>
+    </div>
+</div>
+
+
+<!-- 
+    Estas fechas a las que vamos a aplicar la pipe de date salen en inglés por defecto. 
+    Si queremos que salgan en español, con el formato dd/mm/aaaa, etc... podemos hacer 2 cosas:
+        1) Configurar el locale de la app a español (ver el app.module.ts que ahí lo tenemos hecho y ahora el español es el idioma por defecto)
+        2) Pasarle a la pipe como tercer argumento el idioma que queremos (ver más abajo los ejemplos)
+           OJO: Para que esto funcione tenemos que tener cargado en el locale de la app el idioma (como hemos hecho con el español) aunque
+                no se el establecido por defecto. Para el inglés no hay problema porque es el que carga siempre por defecto.
+-->
+<div class="text-layout">
+    <h1>Date | Fecha | Pipe</h1>
+    <p>Pipe para manejar las fechase</p>
+</div>
+
+<div class="grid">
+    <div class="col-6">
+        <p-card>
+            <ul>
+                <li>fecha</li>
+                <li>fecha | date</li>
+                <li>fecha | date:'short'</li>
+                <li>fecha | date:'long'</li>
+                <li>fecha | date:'EEEE'</li>
+                <li>fecha | date:'MMMM'</li>
+                <li>fecha | date:'dd/MM/yyyy'</li>
+                <li>fecha | date:'MMMM dd, yyyy'</li>
+            </ul>
+
+            <hr />
+
+            <ul>
+                <li>fecha | date:'long':'GMT'</li>
+                <li>fecha | date:'long':'GMT-4'</li>
+                <li>fecha | date:'long':'GMT+1'</li>
+            </ul>
+
+            <hr />
+
+            <ul>
+                <li>fecha | date:'long':'':'en'</li>
+                <li>fecha | date:'long':'':'fr'</li>
+                <li>fecha | date:'long':'':'ja'</li>
+            </ul>
+
+        </p-card>
+    </div>
+    <div class="col-6">
+        <p-card>
+            <ul>
+                <li>{{ fecha }}</li>
+                <li>{{ fecha|date }}</li>
+                <li>{{ fecha|date:'short' }}</li>
+                <li>{{ fecha|date:'long' }}</li>
+                <li>{{ fecha|date:'EEEE' }}</li>
+                <li>{{ fecha|date:'MMMM' }}</li>
+                <li>{{ fecha|date:'dd/MM/yyyy' }}</li>
+                <li>{{ fecha|date:'MMMM dd, yyyy' }}</li>
+            </ul>
+
+            <hr />
+
+            <ul>
+                <li>{{ fecha|date:'long':'GMT' }}</li>
+                <li>{{ fecha|date:'long':'GMT-4' }}</li>
+                <li>{{ fecha|date:'long':'GMT+1' }}</li>
+            </ul>
+
+            <hr />
+
+            <ul>
+                <li>{{ fecha | date:'long':'':'en' }}</li>
+                <li>{{ fecha | date:'long':'':'fr' }}</li>
+                <li>{{ fecha | date:'long':'':'ja' }}</li>
+            </ul>
+        </p-card>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="text-layout">
+    <h1>Pipes no tan comunes</h1>
+    <p>Pipes incluídos en Angular - Usualmente en el Common Module</p>
+</div>
+
+<div class="grid">
+    <!-- Podemos definir los tamaños de pantalla sm, md, lg y xl igual que en bootstrap -->
+    <!-- Este p.ej va a ocupar las 12 columnas en todos los tamaños salvo para los medianos y grandes que ocupará la mitad de la pantalla -->
+    <div class="col md:col-6">
+        <p-fieldset legend="i18nSelect Pipe" [toggleable]="true">
+            <!-- 
+                Esta pipe lo que hace es macth entre lo que vale la variable genero y los valores definidos en el objeto generoMap
+                si genero es 'masculino' entonces se va a mostrar por pantalla 'invitarlo' y si es 'femenino' entonces 'invitarla'
+            -->
+            <p *ngIf="nombre; else showMessage">Saludos {{ nombre }}, es un placer {{ genero | i18nSelect:generoMap }} a nuestro evento.</p>
+
+            <ng-template #showMessage>
+                <p>Por favor selecciona a la persona que quieras invitar</p>
+            </ng-template>
+
+            <button pButton type="button" class="mr-3" label="Invitar Víctor" (click)="invitar()"></button>
+            <button pButton type="button" class="mr-3" label="Invitar Susana" (click)="invitar(true)"></button>
+        </p-fieldset>
+    </div>
+
+    <div class="col md:col-6">
+        <p-fieldset legend="i18nPlural Pipe" [toggleable]="true">
+            <!-- 
+                Esta pipe es parecida a la anterior pero aquí en el objeto Map podemos evaluar condiciones y asignar un valor para cada una
+                de ellas.
+                Para mostrar en pantalla el valor a evaluar (en este caso el clientes.length) se hace con '#'
+
+                Podemos definir tantos casos como queramos. Hay también la opción de definir un 'others' que vendría a recoger todas aquellas
+                opciones posibles que se quedan fuera de las evaluadas (algo así como el else de un if o el default en un switch)
+
+                Ver el .ts para ver cómo hemos hecho el ejemplo
+            -->
+            <p>Actualmente {{ clientes.length | i18nPlural:clientesMap }}</p>
+
+            <button pButton type="button" class="mr-3" label="Añadir 1 cliente" (click)="anhadir(1)"></button>
+            <button pButton type="button" class="mr-3" label="Quitar 1 cliente" (click)="anhadir(-1)"></button>
+        </p-fieldset>
+    </div>
+
+    <div class="col md:col-6">
+        <p-fieldset legend="Slice Pipe" [toggleable]="true">
+            <!-- La etiqueta <pre></pre> sirve para mostrar en el html texto en formato código -->
+            <b>Original</b>
+            <pre>[{{ personas }}]</pre>
+
+            <b>slice:0</b>
+            <pre>{{ personas | slice:0 }}</pre>
+            
+            <b>slice:0:2</b>
+            <pre>{{ personas | slice:0:2 }}</pre>
+
+            <b>slice:1:2</b>
+            <pre>{{ personas | slice:1:2 }}</pre>
+
+            <b>slice:1:3</b>
+            <pre>{{ personas | slice:1:3 }}</pre>
+
+            <b>slice:-1</b>
+            <pre>{{ personas | slice:-1 }}</pre>
+            
+            <b>slice:-2:-1</b>
+            <pre>{{ personas | slice:-2:-1 }}</pre>
+        </p-fieldset>
+    </div>
+
+    <div class="col md:col-6">
+        <p-fieldset legend="KeyValue Pipe y Json Pipe" [toggleable]="true">
+            <b>persona | json</b>
+            <pre>{{ persona | json }}</pre>
+
+            <b>*ngFor="let item of persona | keyvalue"  -- item | json</b>
+            <ul>
+                <!-- 
+                    El KeyValue sirve para poder recorrer objetos json como si fuesen arrays 
+                    
+                    Cada elemento que me saque el ngFor será a su vez un objeto json con 2 elementos: la key y el value. Algo así:
+                    { 'key': 'nombreDeLaPropiedad', 'value': valor definido } 
+                    (nótese que por eso utilizo también la pipe json para que se me muestre en pantalla el objeto json resultante)
+
+                    La pipe json sirve para imprimir por pantalla tanto objetos json como arrays (asociativos y no asociativos)
+                -->
+                <li *ngFor="let item of persona | keyvalue">
+                    {{ item | json }}
+                </li>
+            </ul>
+
+            <hr />
+
+            <b>item.key | titlecase: item.value</b>
+            <ul>
+                <li *ngFor="let item of persona | keyvalue">
+                    {{ item.key | titlecase }}: {{ item.value }}
+                </li>
+            </ul>
+        </p-fieldset>
+    </div>
+
+    <div class="col md:col-6">
+        <p-fieldset legend="Async Pipe" [toggleable]="true">
+            <!-- 
+                Vale tanto para observables como para promesas.
+
+                Lo bueno que tiene esta pipe es que hace ella sola el subscribe() cuando se carga el componente y el unsuscribe() 
+                cuando se destruye. No hace falta que lo hagamos nosotros en el .ts para sacar la respuesta del observable/promesa
+            -->
+            <h4>Para observables y promesas</h4>
+
+            <h4>Observable:</h4>
+            <pre>{{ miObservable | async }}</pre>
+
+            <h4>Promesa:</h4>
+            <pre *ngIf="!(miPromesa | async)">Resolviendo promesa...</pre>
+            <pre>{{ miPromesa | async }}</pre>
+        </p-fieldset>
+    </div>
+</div>
